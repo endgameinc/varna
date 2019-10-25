@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+  {% if alerts|length < 1 %}
+  <h3> No alerts found </h3>
+  {% endif %}
+  {% if link_unack %}
+  <a href="/list_alarms?unack=True"> Click here for only unacknowledged alerts. </a>
+  {% endif %}
+  {% if link_normal %}
+  <a href="/list_alarms"> Click here for all alerts. </a>
+  {% endif %}
+  {% for alert in alerts %}
+  <div class="card is-fullwidth">
+    <header class="card-header">
+      <p class="card-header-title">{{ alert.id }}</p>
+      {% if alert.acked %}
+      <div class="tag-holder"> <span class="tag is-success">acknowledged</span> </div>
+      {% else %}
+      <a href="/ack_alert/{{ alert.id }}"> <span class="tag is-warning">unaccounted</span> </a>
+      {% endif %}
+      <a class="card-header-icon card-toggle">
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </header>
+    {% if alert.shown %}
+    <div class="card-content">
+    {% else %}
+    <div class="card-content is-hidden">
+    {% endif %}
+      <div class="content">
+        <pre> {{ alert.details }} </pre>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content">
+  <p> Minutes Back: {{ settings.minutes_back }} </p>
+  <p> Slack URL: {{ settings.slack_url }} </p>
+  <h3> Accounts </h3>
+  {% for account in settings.accounts %}
+    <p> Regions for {{ account }} <p>
+    {% for region in settings.accounts[account] %}
+    <p> {{ region }} </p>
+    {% endfor %}
+  {% endfor %}
+</div>
+{% endblock %}
+

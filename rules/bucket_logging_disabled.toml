@@ -1,0 +1,13 @@
+title = "Bucket Logging Check"
+author = "Adam (@avidhacker) Ringwood"
+created = "Oct 6, 2019"
+updated = "Oct 6, 2019"
+
+rule = '''
+eventName = "PutBucketLogging" and not requestParameters.BucketLoggingStatus.LoggingEnabled
+'''
+
+[fields]
+user_agent = ["userAgent"]
+source_ip = ["sourceIPAddress"]
+event_time = ["eventTime"]

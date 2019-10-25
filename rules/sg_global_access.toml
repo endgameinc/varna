@@ -1,0 +1,14 @@
+title = "SG Global Access"
+author = "Adam (@avidhacker) Ringwood"
+created = "Oct 6, 2019"
+updated = "Oct 6, 2019"
+
+rule = '''
+eventName = "AuthorizeSecurityGroupIngress" and arraySearch(requestParameters.ipPermissions.items, ips, ips.ipProtocol = "tcp" and arraySearch(ips.ipRanges.items, r, r.cidrIp = "0.0.0.0/0") and ips.toPort = 22)
+'''
+
+[fields]
+user_agent = ["userAgent"]
+source_ip = ["sourceIPAddress"]
+event_time = ["eventTime"]
+result = ["responseElements", "ConsoleLogin"]

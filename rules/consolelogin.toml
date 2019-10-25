@@ -1,0 +1,14 @@
+title = "Console Login without MFA"
+author = "Adam (@avidhacker) Ringwood"
+created = "Oct 14, 2019"
+updated = "Oct 14, 2019"
+
+rule = '''
+eventName = "ConsoleLogin" and additionalEventData.MFAUsed != "Yes"
+'''
+
+[fields]
+creator_arn = ["userIdentity", "arn"]
+source_ip = ["sourceIPAddress"]
+event_time = ["eventTime"]
+responseElements = ["responseElements", "user", "arn"]

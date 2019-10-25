@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varna - AWS Cloudtrail Monitoring</title>
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+  <link rel="stylesheet" type="text/css" href="static/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+  <script src="static/script.js"></script>
+  <script
+          src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+  {% block extend_head %}{% endblock %}
+</head>
+
+<body>
+<section class="hero is-small is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Varna
+        <i class="fas fa-bullhorn"></i>
+      </h1>
+    </div>
+  </div>
+</section>
+  <div class="column">
+    <div class="column is-two-thirds is-offset-2">
+      <div id="input-tabs" class="tabs is-boxed is-centered">
+        <ul class="is-size-6 has-text-weight-semibold">
+          <!--<li id="overview-input">-->
+            <!--<a href="/">-->
+              <!--<h2>Overview</h2>-->
+            <!--</a>-->
+          <!--</li>-->
+          <li id="rules-input">
+            <a href="/list_rules">
+              <span>List of Rules</span>
+            </a>
+          </li>
+          <li id="alarms-input">
+            <a href="/list_alarms">
+              <span>List of Alerts</span>
+            </a>
+          </li>
+          <li id="past-search-input">
+            <a href="/past_search">
+              <span>Past Search</span>
+            </a>
+          </li>
+          <!--<li id="settings-input">-->
+            <!--<a href="/settings">-->
+              <!--<span>Settings</span>-->
+            <!--</a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</body>

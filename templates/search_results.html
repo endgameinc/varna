@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3> Search Results - Started from {{ dt }} - {{ minutes_back }} minutes back.</h3>
+  {% for alert in alerts %}
+  <div class="card is-fullwidth">
+    <header class="card-header">
+      <p class="card-header-title">{{ alert.id }}</p>
+      <a class="card-header-icon card-toggle">
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </header>
+    <div class="card-content is-hidden">
+      <div class="content">
+        <pre>{{ alert.details }}</pre>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}
+

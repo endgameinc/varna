@@ -1,0 +1,14 @@
+title = "New User"
+author = "Adam (@avidhacker) Ringwood"
+created = "Oct 6, 2019"
+updated = "Oct 6, 2019"
+
+rule = '''
+eventName = "CreateUser"
+'''
+
+[fields]
+creator_arn = ["userIdentity", "arn"]
+source_ip = ["sourceIPAddress"]
+event_time = ["eventTime"]
+responseElements = ["responseElements", "user", "arn"]

@@ -1,0 +1,14 @@
+title = "Root Login"
+author = "Adam (@avidhacker) Ringwood"
+created = "Oct 6, 2019"
+updated = "Oct 6, 2019"
+
+rule = '''
+eventName = "ConsoleLogin" and userIdentity.type = "Root"
+'''
+
+[fields]
+user_agent = ["userAgent"]
+source_ip = ["sourceIPAddress"]
+event_time = ["eventTime"]
+result = ["responseElements", "ConsoleLogin"]

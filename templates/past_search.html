@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block extend_head %}
+<link rel="stylesheet" type="text/css" href="static/css/bulma-calendar.min.css">
+<script src="static/js/bulma-calendar.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<form action="/search_results" method="POST">
+<div class="content">
+<label for="search-time">Choose a time to run your search:</label>
+
+<input type="datetime" id="search_time" name="search_time" value="{{ current_time }}">
+</div>
+<div class="content">
+<label for="search-time">Choose how long back to run your search (probably maxed at 3 hours):</label>
+<input id="minutes_back" name="minutes_back" class="input" type="text" placeholder="30">
+</div>
+
+<textarea class="textarea" name="eql_query" id="eql" rows="5" cols="0" placeholder="Please your eql into this box.."></textarea>
+
+<input class="button" type="submit" value="Search!" onclick="past_search()">
+</form>
+{% endblock %}
+
