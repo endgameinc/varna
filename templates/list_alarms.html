@@ -4,10 +4,10 @@
   <h3> No alerts found </h3>
   {% endif %}
   {% if link_unack %}
-  <a href="/list_alarms?unack=True"> Click here for only unacknowledged alerts. </a>
+  <a href="/?unack=True"> Click here for only unacknowledged alerts. </a>
   {% endif %}
   {% if link_normal %}
-  <a href="/list_alarms"> Click here for all alerts. </a>
+  <a href="/"> Click here for all alerts. </a>
   {% endif %}
   {% for alert in alerts %}
   <div class="card is-fullwidth">
