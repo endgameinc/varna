@@ -19,7 +19,7 @@ function set_active_tab(id) {
 document.addEventListener('DOMContentLoaded', function() {
   console.log(location.pathname);
   switch (location.pathname) {
-    case "/list_alarms":
+    case "/":
       set_active_tab("alarms-input");
       break;
     case "/list_rules":

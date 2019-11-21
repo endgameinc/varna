@@ -37,7 +37,7 @@ def http_list_rules():
   rules = get_toml_from_folder("rules")
   return render_template("list_rules.html", rules = rules)
 
-@app.route('/list_alarms')
+@app.route('/')
 def http_list_alarms():
   if request.args.get('unack'):
     unack = False
@@ -49,14 +49,6 @@ def http_list_alarms():
     alerts = recent_alerts()
   formatted_alerts = format_alerts(alerts)
   return render_template("list_alarms.html", alerts = formatted_alerts, link_unack = unack, link_normal = normal)
-
-@app.route('/')
-def http_overview():
-  return redirect("/list_alarms")
-  # tablesize = get_table_size()
-  # rulesize = len(get_toml_from_folder("rules"))
-  # avg_length = 5.1
-  # return render_template("overview.html", tablesize = tablesize, rulesize = rulesize, avg_length = avg_length)
 
 @app.route('/settings')
 def http_settings():
@@ -76,7 +68,7 @@ def http_past_search():
 @app.route('/ack_alert/<id>')
 def http_ack_alert(id):
   ack_alert(id)
-  return redirect("/list_alarms")
+  return redirect("/")
 
 @app.route('/search_results', methods=['POST', 'GET'])
 def http_search_results():
@@ -293,13 +285,13 @@ def get_time_floor(dt):
   return (dt - timedelta(minutes=dt.minute % 5))
 
 def send_slack(msg):
-  if not settings["slack_url"]:
+  if "slack_url" not in settings:
     return
   webhook = settings["slack_url"]
   requests.post(webhook, data=json.dumps({"text" : msg}), headers={'Content-Type': 'application/json'})
 
 def send_email(msg):
-  if not settings["email"]:
+  if "email" not in settings:
     return
   sender = settings["email"]["sender"]
   receivers = settings["email"]["receivers"]
@@ -428,7 +420,7 @@ def get_unacked_alerts():
 def send_slack_unacked_alerts():
   count = len(get_unacked_alerts())
   if count > 1:
-      url = settings["base_url"] + "/list_alarms?unack=True"
+      url = settings["base_url"] + "/?unack=True"
       send_slack("You have %s unacked alerts at the moment.\nlink: %s" % (count, url))
 
 def get_table_size():
