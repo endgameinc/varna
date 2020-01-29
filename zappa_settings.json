@@ -1,9 +1,0 @@
-{
-    "dev": {
-        "app_function": "varna.app",
-        "profile_name": "staging",
-        "project_name": "app",
-        "runtime": "python3.6",
-        "s3_bucket": "varna-lambda"
-    }
-}

@@ -1,37 +1,99 @@
 {% extends "layout.html" %}
 {% block content %}
-  {% if alerts|length < 1 %}
-  <h3> No alerts found </h3>
-  {% endif %}
-  {% if link_unack %}
-  <a href="/?unack=True"> Click here for only unacknowledged alerts. </a>
-  {% endif %}
-  {% if link_normal %}
-  <a href="/"> Click here for all alerts. </a>
-  {% endif %}
-  {% for alert in alerts %}
-  <div class="card is-fullwidth">
-    <header class="card-header">
-      <p class="card-header-title">{{ alert.id }}</p>
-      {% if alert.acked %}
-      <div class="tag-holder"> <span class="tag is-success">acknowledged</span> </div>
-      {% else %}
-      <a href="/ack_alert/{{ alert.id }}"> <span class="tag is-warning">unaccounted</span> </a>
+
+<!-- Section for filtering, searching and any action items -->
+<div class="columns">
+  <div class="column is-4 is-offset-2">
+    <div class="is-pulled-left">
+      {% if link_unack %}
+      <button class="button">
+        <a class="has-text-black" href="/list_alerts?unack=True"> Toggle acknowledged alerts </a>
+      </button>
       {% endif %}
-      <a class="card-header-icon card-toggle">
-        <i class="fa fa-angle-down"></i>
-      </a>
-    </header>
-    {% if alert.shown %}
-    <div class="card-content">
-    {% else %}
-    <div class="card-content is-hidden">
-    {% endif %}
-      <div class="content">
-        <pre> {{ alert.details }} </pre>
-      </div>
+      {% if link_normal %}
+      <button class="button">
+        <a class="has-text-black" href="/list_alerts"> Toggle all alerts. </a>
+      </button>
+      {% endif %}
     </div>
   </div>
-  {% endfor %}
-{% endblock %}
+  <div class="column is-4">
+    <div class="is-pulled-right">
+      <input type="text" placeholder="Search" class="input is-inline">
+      <button id="expand-alerts" class="button is-inline is-size-8 has-text-black">+</button>
+      <button id="collapse-alerts" class="button is-inline is-size-8 has-text-black">-</button>
+    </div>
+  </div>
+</div>
 
+{% if alerts|length < 1 %}
+<!-- No alerts found -->
+<div class="columns">
+  <div class="column is-8 is-offset-2">
+    <div class="card is-fullwidth">
+      <header class="card-header">
+        <h3 class="card-header-title"> No alerts found</h3>
+      </header>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Alerts Section -->
+{% for alert in alerts %}
+<div class="columns">
+  <div class="column is-8 is-offset-2">
+
+    <!-- Alert Card -->
+    <div class="card">
+
+      <!-- Alert Header -->
+      <header class="card-header">
+        <p class="card-header-title">
+          <a class="has-text-black" href="/alert/{{ alert.id }}">Alert ID: {{ alert.id }}</a>
+        </p>
+        {% if alert.acked %}
+        <div class="tag-holder"><span class="tag is-success is-capitalized">Acknowledged</span></div>
+        {% else %}
+        <a href="/ack_alert/{{ alert.id }}"> <span class="tag is-warning is-capitalized">Unaccounted</span></a>
+        {% endif %}
+        <a class="card-header-icon card-toggle"><i class="fa fa-angle-down"></i></a>
+      </header>
+
+      <!-- Alert Content -->
+      <div class="card-content is-hidden">
+        <div class="content">
+          <pre> {{ alert.details }} </pre>
+        </div>
+      </div>
+
+      <!-- Alert Footer/Details -->
+      <footer class="card-footer">
+        <div class="">
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <th class="has-text-black">Rule Triggered</th>
+                <td>{{ alert.rule_title }} </td>
+              </tr>
+              {% for key, value in alert.rule_field %}
+              <tr>
+                <th class="has-text-black">{{ key }}</th>
+                <td>{{ value }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </footer>
+
+    </div>
+
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

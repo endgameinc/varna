@@ -1,24 +1,31 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content">
-  {% for rule in rules %}
-  <div class="card is-fullwidth">
-    <header class="card-header">
-      <div class="card-content">
-      <p class="has-text-weight-semibold is-size-5">{{ rule.title }}</p> <p> Author: {{ rule.author }} • Updated: {{ rule.updated }} </p>
-      </div>
-      <div class="card-header-title"></div>
-      <a class="is-pulled-right card-header-icon card-toggle">
-        <i class="fa fa-angle-down"></i>
-      </a>
-    </header>
-    <div class="card-content is-hidden">
-      <div class="content">
-        {{ rule.rule }}
+<!-- Rules Content -->
+<div class="columns">
+  <div class="column is-8 is-offset-2">
+
+    <!-- Rules Card -->
+    {% for rule in rules %}
+    <div class="card">
+      <header class="card-header">
+        <div class="card-content">
+          <p class="has-text-weight-semibold is-size-5">{{ rule.title }}</p>
+          <p> Author: {{ rule.author }} • Updated: {{ rule.updated }} </p>
+        </div>
+        <div class="card-header-title"></div>
+        <a class="is-pulled-right card-header-icon card-toggle">
+          <i class="fa fa-angle-down"></i>
+        </a>
+      </header>
+      <div class="card-content is-hidden">
+        <div class="content">
+          {{ rule.rule }}
+        </div>
       </div>
     </div>
-  </div>
-  {% endfor %}
-</div>
-{% endblock %}
+    {% endfor %}
 
+  </div>
+</div>
+
+{% endblock %}

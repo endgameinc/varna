@@ -13,3 +13,5 @@ receivers = ["adam@example.com"]
 smtp_server = "smtp.example.com"
 password = "hunter2"
 
+[users]
+admin = "password123"

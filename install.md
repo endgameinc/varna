@@ -1,14 +1,33 @@
 So Varna is pretty simple to install, it requires a couple different lambdas, a dynamodb table and some access.
 
-First let's start with the dynamodb table, make one called `varna_sent_events_v3` that is keyed off of `event_id` with no sort key. I leave this at the default settings of 5 read and 5 write. You will also need to make a GSI for this table, if your in the web console, it's in the index tab. Make a secondary index that is named `account_id-event_time-index` and is keyed off of `account_id` and `event_time`. I also leave this one at default settings regarding size.
+# Getting Started
 
-You will need to make the bundle for deploying Varna right now. With all the rules in place and the settings file modified, you will need to modify `zappa_settings.json` if needed and then run `zappa package` in your python environment. This will produce a zipfile. Upload this zip file and make 4 lambdas with it, `varna-web`, `varna-s3`, `varna-unack`, and `varna-delete`. For all of these, you will need to increase the timeout. 2 minutes seems to be about right. The entry points are as follows
+## Prerequisites
 
-`varna-web` -> `handler.lambda_handler`
-`varna-s3` -> `varna.handle_s3`
-`varna-unack` -> `varna.send_slack_unacked_alerts`
-`varna-delete` -> `varna.delete_old`
+1. AWS Account
+2. CloudTrail
 
-Now it's just a matter of wiring it up, for the web lambda, alb is probably the best choice. Set the s3 lambda to run on new files being created in the s3 folder. Next up is setting the unack and delete to run as often as you want, recommended is once a day for both.
+## AWS Configuration
+
+1. Create a new DynamoDB table called `varna_sent_events_v3` with the partition key named `event_id` and no sort key. Leave the default settings of 5 read and 5 write.
+2. Create a new Global Secondary Indexes (GSI) for this table. Navigate to Indexes tab after creating the DynamoDB table. Click create new index with the index name being `account_id-event_time-index` and the partition key as `account_id` and the sort key as `event_time`. Leave the default settings of 5 read and 5 write.
+3. Create a Cloudtrail trail, or use an existing one. See the below screenshots for our settings of the new trail. In addition, make a note of the bucket name.
+
+## Application Setup
+
+1. Copy `example_settings.toml` to `settings.toml` and configure to your environment.
+2. Copy `zappa_settings.json.template` to `zappa_settings.json` and configure to your environment.
+
+## Slack Setup
+
+1. Create an incoming webhook to use for Slack channel notification. Use the webhook url in the `settings.toml` file for `slack_url`.
+
+
+## Zappa Setup
+
+1. You will need to modify the zappa_settings.json file to include settings for an ssl certificate, details on this can be found in the Zappa documentation.
+2. Run `zappa deploy`
+3. Run `zappa certify`
+4. You should now be able to access Varna and be receiving alerts.
 
 There you go, if you visit the website you setup, you should now see a working installation of Varna. Feel free to do some activity that should alert and confirm that it alerts.

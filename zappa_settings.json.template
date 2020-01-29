@@ -1,0 +1,35 @@
+{
+    "prod": {
+        "debug": false,
+        "log_level": "INFO",
+        "timeout_seconds": 300,
+        "app_function": "varna.app",
+        "profile_name": "prod",
+        "project_name": "varna",
+        "runtime": "python3.7",
+        "s3_bucket": "<INSERT_APP_STORAGE_S3_BUCKET>",
+        "aws_region": "<INSERT_REGION_HERE>",
+        "route53_enabled": false,
+        "domain": "<INSERT_DOMAIN_HERE>",
+        "certificate_arn": "<INSERT_CERTIFICATE_ARN_HERE>",
+        "events": [
+            {
+                "function": "varna.send_slack_unacked_alerts",
+                "expression": "rate(3 hours)"
+            },
+            {
+                "function": "varna.delete_old",
+                "expression": "rate(3 hours)"
+            },
+            {
+                "function": "varna.handle_s3",
+                "event_source": {
+                    "arn": "<INSERT_CLOUDTRAIL_LOG_BUCKET_ARN_HERE>",
+                    "events": [
+                        "s3:ObjectCreated:*"
+                    ]
+                }
+            }
+        ]
+    }
+}

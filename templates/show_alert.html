@@ -1,7 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content">
-  <p> {{ alert }} </p>
+
+<div class="columns">
+  <div class="column is-6">
+
+    <!-- Alert Card -->
+    <div class="card">
+
+      <!-- Alert Header -->
+      <header class="card-header">
+        <p class="card-header-title has-text-black">
+          Alert ID: {{ alert[0].id }}
+        </p>
+        {% if alert[0].acked %}
+        <div class="tag-holder">
+          <p class="tag is-success is-capitalized">Acknowledged</p>
+        </div>
+        {% else %}
+        <div class="tag-holder">
+          <p class="tag is-warning is-capitalized">Unaccounted</span>
+        </div>
+        {% endif %}
+      </header>
+
+      <!-- Alert Footer/Details -->
+      <footer class="card-footer">
+        <div class="">
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <th class="has-text-black">Rule Triggered</th>
+                <td>{{ alert[0].rule_title }} </td>
+              </tr>
+              {% for key, value in alert[0].rule_field %}
+              <tr>
+                <th class="has-text-black">{{ key }}</th>
+                <td>{{ value }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </footer>
+
+    </div>
+
+  </div>
+
+  <div class="column is-6">
+
+    <!-- Alert Content -->
+    <pre> {{ alert[0].details }} </pre>
+
+  </div>
+
 </div>
+
 {% endblock %}
 

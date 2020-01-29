@@ -1,20 +1,51 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3> Search Results - Started from {{ dt }} - {{ minutes_back }} minutes back.</h3>
-  {% for alert in alerts %}
-  <div class="card is-fullwidth">
-    <header class="card-header">
-      <p class="card-header-title">{{ alert.id }}</p>
-      <a class="card-header-icon card-toggle">
-        <i class="fa fa-angle-down"></i>
-      </a>
-    </header>
-    <div class="card-content is-hidden">
-      <div class="content">
-        <pre>{{ alert.details }}</pre>
-      </div>
+
+<!-- Section for filtering, searching and any action items -->
+<div class="columns">
+
+  <div class="column is-6 is-offset-2">
+    <div class="is-pulled-left">
+      <p class="has-text-weight-semibold"> Search Results - Started from {{ dt }} - {{ minutes_back }} minutes back.</p>
     </div>
   </div>
-  {% endfor %}
-{% endblock %}
 
+  <div class="column is-2">
+    <div class="is-pulled-right">
+      <button id="expand-alerts" class="button is-inline is-size-8 has-text-black">+</button>
+      <button id="collapse-alerts" class="button is-inline is-size-8 has-text-black">-</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Alerts Section -->
+{% for alert in alerts %}
+<div class="columns">
+  <div class="column is-8 is-offset-2">
+
+    <!-- Alert Card -->
+    <div class="card">
+
+      <!-- Alert Header -->
+      <header class="card-header">
+        <p class="card-header-title">
+          <a class="has-text-black" href="/alert/{{ alert.id }}">Alert ID: {{ alert.id }}</a>
+        </p>
+        <a class="card-header-icon card-toggle"><i class="fa fa-angle-down"></i></a>
+      </header>
+
+      <!-- Alert Content -->
+      <div class="card-content is-hidden">
+        <div class="content">
+          <pre> {{ alert.details }} </pre>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

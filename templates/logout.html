@@ -1,0 +1,22 @@
+{% extends "layout_unauth.html" %}
+{% block content %}
+
+<div class="columns">
+    <div class="column is-6 is-offset-3 has-text-centered">
+
+        <div class="content">
+            {% if username %}
+            <h4>Successfully logged out {{ username }}</h4>
+            {% else %}
+            <h4>There is no user to logout.</h4>
+            {% endif %}
+
+            <button class="button is-primary">
+                <a class="has-text-white" href="/login">Login</a>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

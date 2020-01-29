@@ -26,6 +26,28 @@ pre {
         justify-content: center;
 }
 
+.tag-holder {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+}
+
 body {
         font-family: "Jost",BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.card-footer-content {
+        padding: 0.75rem;
+}
+
+button.is-primary {
+        background-color:rgb(50, 115, 220) !important;
+}
+
+.datetimepicker-dummy.is-primary::before, .datetimepicker-dummy.is-primary::before {
+        background-color: rgb(50, 115, 220) !important;
+}
+
+.datetimepicker-dummy.is-primary .datetimepicker-clear-button {
+        color: rgb(50, 115, 220) !important;
 }

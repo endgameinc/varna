@@ -1,0 +1,42 @@
+{% extends "layout_unauth.html" %}
+{% block content %}
+
+<!-- Login Page -->
+{% if error %}
+<!-- Error Alert -->
+<div class="notification is-danger">
+    <button class="delete"></button>
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="columns">
+    <div class="column is-4 is-offset-4">
+
+        <!-- Login Form -->
+        <form method="POST">
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control">
+                    <input class="input" type="text" name="username" placeholder="Username" autofocus>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="control">
+                <button class="button is-primary">Submit</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="column is-3"></div>
+</div>
+
+{% endblock %}

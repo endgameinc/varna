@@ -4,6 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "*"
+autopep8 = "*"
 
 [packages]
 requests = "*"
@@ -13,6 +15,11 @@ boto3 = "*"
 ndjson = "*"
 zappa = "*"
 toml = "*"
+pipfile = "*"
+python-dotenv = "*"
+flask-httpauth = "*"
+werkzeug = "*"
+flask-auth = "*"
 
 [requires]
 python_version = "3.7"
