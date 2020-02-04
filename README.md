@@ -4,7 +4,7 @@ Varna is an AWS serverless cloud security tool that parses and alerts on CloudTr
 
 You can find more information to install on how to install Varna in the [install.md](install.md).
 
-All of the rules can be found in the `rules` bucket and should be fairly understandable.
+All of the rules can be found in the `rules` folder and should be fairly understandable.
 
 Features:
 
