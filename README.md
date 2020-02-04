@@ -9,6 +9,7 @@ All of the rules can be found in the `rules` bucket and should be fairly underst
 Features:
 
 * Quick setup, takes less than 10 minutes to setup & deploy using Zappa.
+* Easy to enable slack & email notifications.
 * Rules are quick to write and easy to understand.
 * Easy to enable user authentication.
 * Simple code, readable by a single human in a couple of hours.
