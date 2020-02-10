@@ -3,6 +3,7 @@ slack_url = "https://hooks.slack.com/services/********************"
 age_off = 30
 base_url = "http://localhost/"
 logs_bucket = "bucket_name"
+secret_key = "NWBUdSXUzHxNoO8g" # Change me.
 
 [accounts]
 111111111111 = ["us-east-1"]

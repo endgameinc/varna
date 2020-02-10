@@ -38,7 +38,7 @@ login_url_name = 'user_login'
 settings = toml.load("settings.toml")
 app = Flask(__name__)
 auth = Auth(app, login_url_name)
-app.secret_key = 'NWBUdSXUzHxNoO8g'
+app.secret_key = settings['secret_key']
 app.app_state = {
     "authentication_required": True,
 }
